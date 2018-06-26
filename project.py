@@ -121,17 +121,20 @@ score=regressor.score(features_test,labels_test)
 
 data2=data.Price.groupby(data.Locality.str.title()).sum().reset_index().sort_values('Price',ascending=False)
 d1=data2.head(20)
-labels2=d1.iloc[:,1:2].values
-features2=d1.iloc[:,0:1].values
+LABEL=data2['Locality'].head(20)
+LABELS=[str(i) for i in LABEL]
+labels=d1.iloc[:,1].values
+features=d1.iloc[:,0:1].values
+features[:,0]=le.fit_transform(features[:,0])
+lst=[int(i) for i in features]
 
-#features2[:,0]=le.fit_transform(features2[:,0])
-import matplotlib.pyplot as plt
-plt.figure(figsize=(25,5))
-plt.scatter(features2,labels2,color='red')
-plt.plot(features2,labels2,color='blue')
-plt.title("Locality Vs Prices")
-plt.xlabel("Locality")
-plt.ylabel("Prices")
+import pylab as plt
+plt.figure(figsize=(16,5))
+plt.bar(lst, labels, align='center',color=['g','r','b','y','m'])
+plt.xticks(lst, LABELS,rotation=80)
+plt.title("Locality Vs Prices",fontsize=18)
+plt.xlabel("Locality",fontsize=18)
+plt.ylabel("Prices",fontsize=18)
 plt.show()
 
 
@@ -147,78 +150,85 @@ bhk3=data2["3 BHK"]
 
 # GRAPHICAL VIEW OF HOT AREAS FOR 1 BHK APARTMENTS
 
-data_1bhk=pd.DataFrame()
-data_1bhk['Localities']=localities
-data_1bhk['1 BHK']=bhk1
+
+data_bhk=pd.DataFrame()
+data_bhk['Localities']=localities
+data_bhk['1 BHK']=bhk1
 #removing all zeros from the dataframe
-data_1bhk=data_1bhk[(data_1bhk!=0).all(axis=1)]
+data_bhk=data_bhk[(data_bhk!=0).all(axis=1)]
 #resetting index    
-data_1bhk = data_1bhk.reset_index(drop=True) 
+data_bhk = data_bhk.reset_index(drop=True) 
 
-d1bhk=data_1bhk.head(20)
-l_1bhk=d1bhk.iloc[:,1:2].values
-f_1bhk=d1bhk.iloc[:,0:1].values
-#features2[:,0]=le.fit_transform(features2[:,0])
+LABEL=data_bhk['Localities']
+LABELS=[str(i) for i in LABEL]
+l_bhk=data_bhk.iloc[:,1].values
+f_bhk=data_bhk.iloc[:,0:1].values
+f_bhk[:,0]=le.fit_transform(f_bhk[:,0])
+lst=[int(i) for i in f_bhk]
 
-import matplotlib.pyplot as plt
+import pylab as plt
 plt.figure(figsize=(30,5))
-plt.scatter(f_1bhk,l_1bhk,color='red')
-plt.plot(f_1bhk,l_1bhk,color='blue')
-plt.title("Locality Vs  1 BHK Prices")
-plt.xlabel("Locality")
-plt.ylabel("1 BHK Prices")
+plt.bar(lst, l_bhk, align='center',color=['g','r','b','y','m'])
+plt.xticks(lst, LABELS,rotation=80)
+plt.title("Locality Vs Prices",fontsize=18)
+plt.xlabel("Locality",fontsize=18)
+plt.ylabel("Prices",fontsize=18)
 plt.show()
+
 
 
 # GRAPHICAL VIEW OF HOT AREAS FOR 2 BHK APARTMENTS
 
-data_2bhk=pd.DataFrame()
-data_2bhk['Localities']=localities
-data_2bhk['2 BHK']=bhk2
+
+data_bhk=pd.DataFrame()
+data_bhk['Localities']=localities
+data_bhk['1 BHK']=bhk2
+
 #removing all zeros from the dataframe
-data_2bhk=data_2bhk[(data_2bhk!=0).all(axis=1)]
+data_bhk=data_bhk[(data_bhk!=0).all(axis=1)]
+
 #resetting index    
-data_2bhk = data_2bhk.reset_index(drop=True) 
+data_bhk = data_bhk.reset_index(drop=True) 
 
-d2bhk=data_2bhk.head(20)
-l_2bhk=d2bhk.iloc[:,1:2].values
-f_2bhk=d2bhk.iloc[:,0:1].values
-#features2[:,0]=le.fit_transform(features2[:,0])
+LABEL=data_bhk['Localities']
+LABELS=[str(i) for i in LABEL]
+l_bhk=data_bhk.iloc[:,1].values
+f_bhk=data_bhk.iloc[:,0:1].values
+f_bhk[:,0]=le.fit_transform(f_bhk[:,0])
+lst=[int(i) for i in f_bhk]
 
-import matplotlib.pyplot as plt
 plt.figure(figsize=(30,5))
-plt.scatter(f_2bhk,l_2bhk,color='red')
-plt.plot(f_2bhk,l_2bhk,color='blue')
-plt.title("Locality Vs  1 BHK Prices")
+plt.bar(lst, l_bhk, align='center',color=['g','r','b','y','m'])
+plt.xticks(lst, LABELS,rotation=80)
+plt.title("Locality Vs Prices",fontsize=18)
 plt.xlabel("Locality")
-plt.ylabel("1 BHK Prices")
+plt.ylabel("Prices",fontsize=18)
 plt.show()
 
 
 # GRAPHICAL VIEW OF HOT AREAS FOR 3 BHK APARTMENTS
 
-data_3bhk=pd.DataFrame()
-data_3bhk['Localities']=localities
-data_3bhk['3 BHK']=bhk3
+data_bhk=pd.DataFrame()
+data_bhk['Localities']=localities
+data_bhk['1 BHK']=bhk3
+
 #removing all zeros from the dataframe
-data_3bhk=data_3bhk[(data_3bhk!=0).all(axis=1)]
+data_bhk=data_bhk[(data_bhk!=0).all(axis=1)]
+
 #resetting index    
-data_3bhk = data_3bhk.reset_index(drop=True) 
+data_bhk = data_bhk.reset_index(drop=True) 
 
-d3bhk=data_3bhk.head(20)
-l_3bhk=d3bhk.iloc[:,1:2].values
-f_3bhk=d3bhk.iloc[:,0:1].values
-#features2[:,0]=le.fit_transform(features2[:,0])
+LABEL=data_bhk['Localities']
+LABELS=[str(i) for i in LABEL]
+l_bhk=data_bhk.iloc[:,1].values
+f_bhk=data_bhk.iloc[:,0:1].values
+f_bhk[:,0]=le.fit_transform(f_bhk[:,0])
+lst=[int(i) for i in f_bhk]
 
-import matplotlib.pyplot as plt
 plt.figure(figsize=(30,5))
-plt.scatter(f_3bhk,l_3bhk,color='red')
-plt.plot(f_3bhk,l_3bhk,color='blue')
-plt.title("Locality Vs  1 BHK Prices")
-plt.xlabel("Locality")
-plt.ylabel("1 BHK Prices")
+plt.bar(lst, l_bhk, align='center',color=['g','r','b','y','m'])
+plt.xticks(lst, LABELS,rotation=80)
+plt.title("Locality Vs Prices",fontsize=18)
+plt.xlabel("Locality",fontsize=18)
+plt.ylabel("Prices",fontsize=18)
 plt.show()
-
-
-
-
